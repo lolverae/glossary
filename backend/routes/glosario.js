@@ -1,49 +1,49 @@
 const router = require('express').Router();
-let Palabra = require('../models/glosario.model');
+let Exercise = require('../models/glosario.model');
 
 router.route('/').get((req, res) => {
-  Palabra.find()
-    .then(palabras => res.json(palabras))
+  Exercise.find()
+    .then(exercises => res.json(exercises))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/add').post((req, res) => {
   const username = req.body.username;
-  const palabraADefinir = req.body.palabraADefinir;
-  const significado = Number(req.body.significado);
+  const description = req.body.description;
+  const duration = Number(req.body.duration);
 
-  const nuevaPalabra = new Palabra({
+  const newExercise = new Exercise({
     username,
-    palabraADefinir,
-    significado,
+    description,
+    duration
   });
 
-  nuevaPalabra.save()
-  .then(() => res.json('Palabra added!'))
+  newExercise.save()
+  .then(() => res.json('Exercise added!'))
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/:id').get((req, res) => {
-  Palabra.findById(req.params.id)
-    .then(palabra => res.json(palabra))
+  Exercise.findById(req.params.id)
+    .then(exercise => res.json(exercise))
     .catch(err => res.status(400).json('Error: ' + err));
-  });
-  
-  router.route('/:id').delete((req, res) => {
-  Palabra.findByIdAndDelete(req.params.id)
-    .then(() => res.json('Palabra deleted.'))
+});
+
+router.route('/:id').delete((req, res) => {
+  Exercise.findByIdAndDelete(req.params.id)
+    .then(() => res.json('Exercise deleted.'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/update/:id').post((req, res) => {
-  Palabra.findById(req.params.id)
-    .then(palabra => {
-      palabra.username = req.body.username;
-      palabra.palabraADefinir = req.body.palabraADefinir;
-      palabra.significado = Number(req.body.significado);
+  Exercise.findById(req.params.id)
+    .then(exercise => {
+      exercise.username = req.body.username;
+      exercise.description = req.body.description;
+      exercise.duration = Number(req.body.duration);
 
-      palabra.save()
-        .then(() => res.json('Palabra updated!'))
+      exercise.save()
+        .then(() => res.json('Exercise updated!'))
         .catch(err => res.status(400).json('Error: ' + err));
     })
     .catch(err => res.status(400).json('Error: ' + err));
