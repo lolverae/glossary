@@ -29,9 +29,9 @@ router.route('/:id').get((req, res) => {
   Palabra.findById(req.params.id)
     .then(palabra => res.json(palabra))
     .catch(err => res.status(400).json('Error: ' + err));
-});
-
-router.route('/:id').delete((req, res) => {
+  });
+  
+  router.route('/:id').delete((req, res) => {
   Palabra.findByIdAndDelete(req.params.id)
     .then(() => res.json('Palabra deleted.'))
     .catch(err => res.status(400).json('Error: ' + err));
