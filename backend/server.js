@@ -1,4 +1,4 @@
-  
+
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -19,10 +19,10 @@ connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 })
 
-const exercisesRouter = require('./routes/glosario');
+const glosarioRouter = require('./routes/glosario');
 const usersRouter = require('./routes/usuarios');
 
-app.use('/exercises', exercisesRouter);
+app.use('/glosario', glosarioRouter);
 app.use('/users', usersRouter);
 
 app.listen(port, () => {

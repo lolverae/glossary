@@ -6,7 +6,6 @@ const palabrasSchema = new Schema({
   username: { type: String, required: true },
   palabraADefinir: { type: String, required: true },
   significado: { type: String, required: true },
-  date: { type: Date, required: true },
 }, {
   timestamps: true,
 });

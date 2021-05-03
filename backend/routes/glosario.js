@@ -11,13 +11,11 @@ router.route('/add').post((req, res) => {
   const username = req.body.username;
   const palabraADefinir = req.body.palabraADefinir;
   const significado = Number(req.body.significado);
-  const date = Date.parse(req.body.date);
 
   const nuevaPalabra = new Palabra({
     username,
     palabraADefinir,
     significado,
-    date,
   });
 
   nuevaPalabra.save()
@@ -43,7 +41,6 @@ router.route('/update/:id').post((req, res) => {
       palabra.username = req.body.username;
       palabra.palabraADefinir = req.body.palabraADefinir;
       palabra.significado = Number(req.body.significado);
-      palabra.date = Date.parse(req.body.date);
 
       palabra.save()
         .then(() => res.json('Palabra updated!'))
